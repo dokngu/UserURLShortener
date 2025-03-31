@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>URL Shortener</title>
+</head>
+<body>
+  <h1>Register as a new user</h1>
+  <form method="POST" action="{{ url_for('new_user_form') }}">
+    <input type="text" name="username" id="username" placeholder="Username..." maxlength="32" required>
+    <input type="text" name="password" id="password" placeholder="Password..." required>
+    <input type="email" name="email" id="email" placeholder="Email..." maxlength="32" required>
+    <button type="submit">Register</button>
+  </form>
+</body>
+</html>

@@ -1,0 +1,457 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head></head><body>
+
+  
+    
+    
+  
+  
+  <h1>URL Shortener API</h1>
+    <div class="app-desc">This is the API for a simple URL shortener.</div>
+    <div class="app-desc">More information: <a rel="noopener" href="https://helloreverb.com">https://helloreverb.com</a></div>
+    <div class="app-desc">Contact Info: <a rel="noopener" href="do.ngu@unb.ca">do.ngu@unb.ca</a></div>
+    <div class="app-desc">Version: 1.0.0</div>
+    
+    <div class="license-info">Apache 2.0</div>
+    <div class="license-url">http://www.apache.org/licenses/LICENSE-2.0.html</div>
+  <h2>Access</h2>
+    <ol>
+      <li>APIKey KeyParamName:session_id KeyInQuery:true KeyInHeader:false</li>
+    </ol>
+
+  <h2><a rel="noopener" name="__Methods">Methods</a></h2>
+  [ Jump to <a rel="noopener" href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a rel="noopener" href="#Admin">Admin</a></h4>
+  <ul>
+  <li><a rel="noopener" href="#deleteShortenedURL"><code><span class="http-method">delete</span> /urls/{urlID}/delete</code></a></li>
+  <li><a rel="noopener" href="#updateShortenedURL"><code><span class="http-method">put</span> /urls/{urlID}/update</code></a></li>
+  </ul>
+  <h4><a rel="noopener" href="#Any">Any</a></h4>
+  <ul>
+  <li><a rel="noopener" href="#createUser"><code><span class="http-method">post</span> /users/new</code></a></li>
+  <li><a rel="noopener" href="#getOriginalURL"><code><span class="http-method">get</span> /urls/{urlID}</code></a></li>
+  <li><a rel="noopener" href="#userLogin"><code><span class="http-method">post</span> /users/{username}/login</code></a></li>
+  </ul>
+  <h4><a rel="noopener" href="#User">User</a></h4>
+  <ul>
+  <li><a rel="noopener" href="#createShortenedURL"><code><span class="http-method">post</span> /urls/new</code></a></li>
+  </ul>
+
+  <h1><a rel="noopener" name="Admin">Admin</a></h1>
+  <div class="method"><a rel="noopener" name="deleteShortenedURL"></a>
+    <div class="method-path">
+    <a rel="noopener" class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /urls/{urlID}/delete</code></pre></div>
+    <div class="method-summary">Delete a shortened URL (<span class="nickname">deleteShortenedURL</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">urlID (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> — The urlID to delete </div>    </div>  
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+    </div>  
+
+
+
+    
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Successfully deleted the shortened URL
+        <a rel="noopener" href="#"></a>
+    <h4 class="field-label">401</h4>
+    Unauthorized (authentication required)
+        <a rel="noopener" href="#"></a>
+    <h4 class="field-label">403</h4>
+    Forbidden (only admins can delete)
+        <a rel="noopener" href="#"></a>
+    <h4 class="field-label">404</h4>
+    urlID not found
+        <a rel="noopener" href="#"></a>
+    <h4 class="field-label">500</h4>
+    Server error
+        <a rel="noopener" href="#"></a>
+  </div> 
+  <hr/>
+  <div class="method"><a rel="noopener" name="updateShortenedURL"></a>
+    <div class="method-path">
+    <a rel="noopener" class="up" href="#__Methods">Up</a>
+    <pre class="put"><code class="huge"><span class="http-method">put</span> /urls/{urlID}/update</code></pre></div>
+    <div class="method-summary">Update an existing shortened URL (<span class="nickname">updateShortenedURL</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">urlID (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> — The urlID to update </div>    </div>  
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a rel="noopener" href="#urlID_update_body">urlID_update_body</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> —  </div>
+            <div class="param-desc"><span class="param-type">example: <code>{
+  &quot;value&quot; : {
+    &quot;original_url&quot; : &quot;https://www.sierramadre.com/lettinggo&quot;
+  }
+}</code></span></div>    </div>  
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+    </div>  
+
+
+
+    
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Successfully updated the shortened URL
+        <a rel="noopener" href="#"></a>
+    <h4 class="field-label">400</h4>
+    Invalid URL format
+        <a rel="noopener" href="#"></a>
+    <h4 class="field-label">401</h4>
+    Unauthorized, authentication required
+        <a rel="noopener" href="#"></a>
+    <h4 class="field-label">403</h4>
+    Forbidden, only admins can update
+        <a rel="noopener" href="#"></a>
+    <h4 class="field-label">404</h4>
+    urlID not found
+        <a rel="noopener" href="#"></a>
+    <h4 class="field-label">500</h4>
+    Server error
+        <a rel="noopener" href="#"></a>
+  </div> 
+  <hr/>
+  <h1><a rel="noopener" name="Any">Any</a></h1>
+  <div class="method"><a rel="noopener" name="createUser"></a>
+    <div class="method-path">
+    <a rel="noopener" class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /users/new</code></pre></div>
+    <div class="method-summary">Create a new user (<span class="nickname">createUser</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a rel="noopener" href="#users_new_body">users_new_body</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> —  </div>
+            <div class="param-desc"><span class="param-type">example: <code>{
+  &quot;value&quot; : {
+    &quot;username&quot; : &quot;frankcatton&quot;,
+    &quot;email&quot; : &quot;fcatton@ocean.com&quot;,
+    &quot;password&quot; : &quot;securePassword123&quot;
+  }
+}</code></span></div>    </div>  
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a rel="noopener" href="#inline_response_201">inline_response_201</a>
+      
+    </div>
+
+    
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  &quot;user_id&quot; : &quot;user_id&quot;,
+  &quot;email&quot; : &quot;email&quot;,
+  &quot;username&quot; : &quot;username&quot;
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">201</h4>
+    User successfully created
+        <a rel="noopener" href="#inline_response_201">inline_response_201</a>
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{&quot;user_id&quot;:&quot;1001&quot;,&quot;username&quot;:&quot;frankcatton&quot;,&quot;email&quot;:&quot;fcatton@ocean.com&quot;}</code></pre>
+    <h4 class="field-label">400</h4>
+    Bad request (invalid input)
+        <a rel="noopener" href="#"></a>
+    <h4 class="field-label">409</h4>
+    Conflict (username or email already exists)
+        <a rel="noopener" href="#"></a>
+    <h4 class="field-label">500</h4>
+    Server error
+        <a rel="noopener" href="#"></a>
+  </div> 
+  <hr/>
+  <div class="method"><a rel="noopener" name="getOriginalURL"></a>
+    <div class="method-path">
+    <a rel="noopener" class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /urls/{urlID}</code></pre></div>
+    <div class="method-summary">Get the original URL for a given urlID (<span class="nickname">getOriginalURL</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">urlID (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> — The urlID assigned to the original URL </div>    </div>  
+
+
+
+
+
+
+
+    
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Redirect to the original URL
+        <a rel="noopener" href="#"></a>
+    <h4 class="field-label">404</h4>
+    urlID not found
+        <a rel="noopener" href="#"></a>
+    <h4 class="field-label">500</h4>
+    Server error
+        <a rel="noopener" href="#"></a>
+  </div> 
+  <hr/>
+  <div class="method"><a rel="noopener" name="userLogin"></a>
+    <div class="method-path">
+    <a rel="noopener" class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /users/{username}/login</code></pre></div>
+    <div class="method-summary">User login (<span class="nickname">userLogin</span>)</div>
+    <div class="method-notes"></div>
+
+    <h3 class="field-label">Path parameters</h3>
+    <div class="field-items">
+      <div class="param">username (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Path Parameter</span> — User&#39;s username </div>    </div>  
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a rel="noopener" href="#username_login_body">username_login_body</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> —  </div>
+            <div class="param-desc"><span class="param-type">example: <code>{
+  &quot;value&quot; : {
+    &quot;password&quot; : &quot;securePassword123&quot;
+  }
+}</code></span></div>    </div>  
+
+
+
+
+
+    
+
+
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    Login successful (returns session cookie)
+        <a rel="noopener" href="#"></a>
+    <h4 class="field-label">401</h4>
+    Unauthorized (invalid credentials)
+        <a rel="noopener" href="#"></a>
+    <h4 class="field-label">500</h4>
+    Server error
+        <a rel="noopener" href="#"></a>
+  </div> 
+  <hr/>
+  <h1><a rel="noopener" name="User">User</a></h1>
+  <div class="method"><a rel="noopener" name="createShortenedURL"></a>
+    <div class="method-path">
+    <a rel="noopener" class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /urls/new</code></pre></div>
+    <div class="method-summary">Create a new shortened URL (<span class="nickname">createShortenedURL</span>)</div>
+    <div class="method-notes"></div>
+
+
+    <h3 class="field-label">Consumes</h3>
+    This API call consumes the following media types via the <span class="header">Content-Type</span> request header:
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">body <a rel="noopener" href="#urls_new_body">urls_new_body</a> (required)</div>
+      
+            <div class="param-desc"><span class="param-type">Body Parameter</span> —  </div>
+            <div class="param-desc"><span class="param-type">example: <code>{
+  &quot;value&quot; : {
+    &quot;original_url&quot; : &quot;https://www.sierramadre.com/gettingthere&quot;
+  }
+}</code></span></div>    </div>  
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+    </div>  
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a rel="noopener" href="#inline_response_201_1">inline_response_201_1</a>
+      
+    </div>
+
+    
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{
+  &quot;urlID&quot; : &quot;urlID&quot;
+}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">201</h4>
+    Successfully created shortened URL
+        <a rel="noopener" href="#inline_response_201_1">inline_response_201_1</a>
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{&quot;urlID&quot;:&quot;1etg0&quot;}</code></pre>
+    <h4 class="field-label">400</h4>
+    Invalid URL format
+        <a rel="noopener" href="#"></a>
+    <h4 class="field-label">401</h4>
+    Unauthorized (authentication required)
+        <a rel="noopener" href="#"></a>
+    <h4 class="field-label">500</h4>
+    Server error
+        <a rel="noopener" href="#"></a>
+  </div> 
+  <hr/>
+
+  <h2><a rel="noopener" name="__Models">Models</a></h2>
+  [ Jump to <a rel="noopener" href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a rel="noopener" href="#inline_response_201"><code>inline_response_201</code></a></li>
+    <li><a rel="noopener" href="#inline_response_201_1"><code>inline_response_201_1</code></a></li>
+    <li><a rel="noopener" href="#urlID_update_body"><code>urlID_update_body</code></a></li>
+    <li><a rel="noopener" href="#urls_new_body"><code>urls_new_body</code></a></li>
+    <li><a rel="noopener" href="#username_login_body"><code>username_login_body</code></a></li>
+    <li><a rel="noopener" href="#users_new_body"><code>users_new_body</code></a></li>
+  </ol>
+
+  <div class="model">
+    <h3><a rel="noopener" name="inline_response_201"><code>inline_response_201</code></a> <a rel="noopener" class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">user_id (optional)</div><div class="param-desc"><span class="param-type"><a rel="noopener" href="#string">String</a></span> New user&#39;s unique ID </div>
+<div class="param">username (optional)</div><div class="param-desc"><span class="param-type"><a rel="noopener" href="#string">String</a></span> New user&#39;s username </div>
+<div class="param">email (optional)</div><div class="param-desc"><span class="param-type"><a rel="noopener" href="#string">String</a></span> New user&#39;s email address </div>
+    </div>  
+  </div>
+  <div class="model">
+    <h3><a rel="noopener" name="inline_response_201_1"><code>inline_response_201_1</code></a> <a rel="noopener" class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">urlID (optional)</div><div class="param-desc"><span class="param-type"><a rel="noopener" href="#string">String</a></span> Shortened URL </div>
+    </div>  
+  </div>
+  <div class="model">
+    <h3><a rel="noopener" name="urlID_update_body"><code>urlID_update_body</code></a> <a rel="noopener" class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">original_url </div><div class="param-desc"><span class="param-type"><a rel="noopener" href="#string">String</a></span> The new original URL format: uri</div>
+    </div>  
+  </div>
+  <div class="model">
+    <h3><a rel="noopener" name="urls_new_body"><code>urls_new_body</code></a> <a rel="noopener" class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">original_url </div><div class="param-desc"><span class="param-type"><a rel="noopener" href="#string">String</a></span> URL to be shortened format: uri</div>
+    </div>  
+  </div>
+  <div class="model">
+    <h3><a rel="noopener" name="username_login_body"><code>username_login_body</code></a> <a rel="noopener" class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">password </div><div class="param-desc"><span class="param-type"><a rel="noopener" href="#string">String</a></span> User&#39;s password. Hashing for password storage is done server-side. </div>
+    </div>  
+  </div>
+  <div class="model">
+    <h3><a rel="noopener" name="users_new_body"><code>users_new_body</code></a> <a rel="noopener" class="up" href="#__Models">Up</a></h3>
+    
+    <div class="field-items">
+      <div class="param">username </div><div class="param-desc"><span class="param-type"><a rel="noopener" href="#string">String</a></span> New user&#39;s chosen username </div>
+<div class="param">email </div><div class="param-desc"><span class="param-type"><a rel="noopener" href="#string">String</a></span> New user&#39;s chosen email address format: email</div>
+<div class="param">password </div><div class="param-desc"><span class="param-type"><a rel="noopener" href="#string">String</a></span> New user&#39;s chosen password. </div>
+    </div>  
+  </div>
+  
+
+<script type="module" src="https://s.brightspace.com/lib/bsi/2025.3.232/unbundled/mathjax.js"></script><script type="text/javascript">document.addEventListener('DOMContentLoaded', function() {
+						if (document.querySelector('math') || /\$\$|\\\(|\\\[|\\begin{|\\ref{|\\eqref{/.test(document.body.innerHTML)) {
+							document.querySelectorAll('mspace[linebreak="newline"]').forEach(elm => {
+								elm.setAttribute('style', 'display: block; height: 0.5rem;');
+							});
+
+							window.D2L.MathJax.loadMathJax({
+								outputScale: 1.5,
+								renderLatex: false,
+								enableMML3Support: false
+							});
+						}
+					});</script><script type="module" src="https://s.brightspace.com/lib/bsi/2025.3.232/unbundled/prism.js"></script><script type="text/javascript">document.addEventListener('DOMContentLoaded', function() {
+					document.querySelectorAll('.d2l-code').forEach(code => {
+						window.D2L.Prism.formatCodeElement(code);
+					});
+				});</script><script type="module" src="https://s.brightspace.com/lib/bsi/2025.3.232/unbundled/embeds.js"></script><script type="text/javascript">document.addEventListener('DOMContentLoaded', function() {
+					window.D2L.EmbedRenderer.renderEmbeds(document.body);
+				});</script></body></html>
