@@ -1,0 +1,70 @@
+# URL shortener API test plan
+
+## https://cs3103.cs.unb.ca:8043/
+
+## ENDPOINTS LIST
+- [GET]  Go to application: /
+- [POST] Register a new user: /users/new
+- [POST] Log in as a user: /login
+- [POST] Shorten a URL (users only): /urls
+- [GET]  Visit a shortened URL: /urls/<short_url>
+- [POST] Log out: /logout
+
+## /
+curl -k https://cs3103.cs.unb.ca:8043/
+
+Output is the index.html file
+
+## /users/new
+curl -X POST -k -H "Content-Type: application/json" https://cs3103.cs.unb.ca:8043/users/new -d '{"username": "some_test_user", "password":"twotwosmywordcroski", "email": "test@funny.com"}'
+
+Example output:
+{
+  "uri": "https://cs3103.cs.unb.ca:8043/users/new/3"
+}
+
+## /login
+curl -X POST -k -H "Content-Type: application/json" https://cs3103.cs.unb.ca:8043/login -d '{"username": "some_test_user", "password":"twotwosmywordcroski"}'
+
+Example output:
+"
+{
+  "message": "Logged in successfully"
+}
+"
+
+## /urls
+curl -X POST -k -H "Content-Type: application/json" https://cs3103.cs.unb.ca:8043/urls -d '{"long_url": "http://staggeringbeauty.com"}'
+
+Example output:
+"
+{
+  "message": "Unauthenticated user"
+}
+"
+OR
+"
+{
+  "link": "abcdEfgh"
+}
+"
+
+## /urls/<short_url>
+curl -X GET -k https://cs3103.cs.unb.ca:8043/urls/sj3riyYc
+
+Example output:
+"
+<!doctype html>
+<html lang=en>
+<title>Redirecting...</title>
+<h1>Redirecting...</h1>
+<p>You should be redirected automatically to the target URL: <a href="http://accuweather.com">http://accuweather.com</a>. If not, click the link.
+"
+
+## /logout
+curl -X POST -k https://cs3103.cs.unb.ca:8043/logout
+"
+{
+  "message": "Logged out successfully"
+}
+"

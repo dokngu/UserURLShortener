@@ -1,7 +1,6 @@
 #
-# database utilities. Hopefully isolating the db-specific code
-#
-# Rick Wightman, May 2023
+# database utilities by Rick Wightman of UNB
+# May 2023
 #
 import pymysql
 import pymysql.cursors
